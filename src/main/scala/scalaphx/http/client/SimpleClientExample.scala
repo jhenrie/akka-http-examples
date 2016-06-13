@@ -25,7 +25,10 @@ object SimpleClientExample extends App {
 
   implicit val ec = system.dispatcher
 
-  val futureResults = Http().singleRequest(HttpRequest(uri = "http://localhost:8080/weather/current/85085").withHeaders(Accept(MediaTypes.`application/json`)))
+  //Zip options - 85021
+  //            - 85085
+  //            - 98101
+  val futureResults = Http().singleRequest(HttpRequest(uri = "http://localhost:8080/weather/current/85021").withHeaders(Accept(MediaTypes.`application/json`)))
 
   futureResults.flatMap {
     response =>

@@ -25,8 +25,9 @@ object QuickExampleHttpService extends App {
   // use the execution context from the actor system above
   implicit val executionContext = system.dispatcher
   // define a simple route: GET /hello
-  // NOTE - this is a def (method) vs a val (value) because this class extends App, which extends DelayedInit, which causes issues with unit testing.
-  //        in production - you would not handle it this way, see the WeatherService example for a better structured 'real life' example.
+  // NOTE - this is a def (method) vs a val (value) because this class extends App, which extends DelayedInit, which
+  //        causes issues with unit testing. in production - you would not handle it this way, see the WeatherService
+  //        example for a better structured 'real life' example.
   def route =
     path("hello") {
       get {

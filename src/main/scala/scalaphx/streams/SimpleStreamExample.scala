@@ -24,20 +24,20 @@ object SimpleStreamExample extends App {
     implicit val system = ActorSystem("SimpleStreamExample")
     implicit val materializer = ActorMaterializer()
 
+    //Source Lines
     val source = Source(1 to 100)
-
     val factorials = source.scan(BigInt(1))((acc, next) => acc * next)
 
     println("calculating factorials & writing to disk")
 
+    //Flow Piece
     val result = factorials.map(num => ByteString(s"$num\n")).runWith(FileIO.toPath(Paths.get("factorials.txt")))
 
     println(s"Writing factorials to console, throttled...")
 
+    //Sink Piece
     val done = factorials.zipWith(Source(0 to 100))((num, idx) => s"$idx! = $num").throttle(1, 250.millisecond, 1, ThrottleMode.shaping).runForeach(println)
 
     println("Fini!")
-
-
 
 }

@@ -19,3 +19,6 @@ project/plugins/project/
 .scala_dependencies
 .worksheet
 
+# Project specific
+factorials.txt
+
